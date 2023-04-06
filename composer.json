@@ -1,5 +1,5 @@
 {
-    "name": "adamtheadmin/scout-elasticsearch-driver",
+    "name": "fashionphile/scout-elasticsearch-driver",
     "type": "library",
     "description": "The Elasticsearch Driver for Laravel Scout",
     "keywords": [
