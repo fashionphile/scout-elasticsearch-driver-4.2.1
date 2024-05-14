@@ -274,7 +274,7 @@ class ElasticMigrateCommand extends Command
 
         $this->call(
             'scout:import',
-            ['model' => get_class($sourceModel)]
+            [get_class($sourceModel)]
         );
     }
 
