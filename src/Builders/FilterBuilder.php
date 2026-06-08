@@ -83,16 +83,14 @@ class FilterBuilder extends Builder
      *
      * Supported operators are =, &gt;, &lt;, &gt;=, &lt;=, &lt;&gt;
      * @param  string  $field Field name
+     * @param  mixed  $operator
      * @param  mixed  $value Scalar value or an array
      * @return $this
      */
-    public function where($field, $value)
+    public function where($field, $operator, $value = null)
     {
-        $args = func_get_args();
-
-        if (count($args) === 3) {
-            [$field, $operator, $value] = $args;
-        } else {
+        if (func_num_args() === 2) {
+            $value = $operator;
             $operator = '=';
         }
 
@@ -164,10 +162,10 @@ class FilterBuilder extends Builder
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html Terms query
      *
      * @param  string  $field
-     * @param  array  $value
+     * @param  mixed  $value
      * @return $this
      */
-    public function whereIn($field, array $value)
+    public function whereIn($field, $value)
     {
         $this->wheres['must'][] = [
             'terms' => [
@@ -184,10 +182,10 @@ class FilterBuilder extends Builder
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html Terms query
      *
      * @param  string  $field
-     * @param  array  $value
+     * @param  mixed  $value
      * @return $this
      */
-    public function whereNotIn($field, array $value)
+    public function whereNotIn($field, $value)
     {
         $this->wheres['must_not'][] = [
             'terms' => [

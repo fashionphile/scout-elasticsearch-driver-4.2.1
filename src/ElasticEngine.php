@@ -5,6 +5,7 @@ namespace ScoutElastic;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\LazyCollection;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
@@ -379,14 +380,12 @@ class ElasticEngine extends Engine
 
     public function createIndex($name, array $options = [])
     {
-        $client = ClientBuilder::create()->build();
-
         $params = [
             'index' => $name,
             'body' => $options,
         ];
 
-        $response = $client->indices()->create($params);
+        $response = ElasticClient::indices()->create($params);
 
         return $response;
     }
